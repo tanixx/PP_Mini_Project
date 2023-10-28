@@ -39,7 +39,38 @@ void addMatrix(int row,int col,int matrix1[row][col],int matrix2[row][col],int s
             sum[i][j]=matrix1[i][j]+matrix2[i][j];
         }
     }
+    printf("Additon of two Matrix");
     printMatrix(row,col,sum[row][col]);
+}
+
+
+//Function for Subtraction
+void addMatrix(int row,int col,int matrix1[row][col],int matrix2[row][col],int sum[row][col])
+{
+    for(int i=0;i<=row;i++)
+    {
+        for(int j=0;j<=row;j++)
+        {
+            sum[i][j]=matrix1[i][j]-matrix2[i][j];
+        }
+    }
+    printf("Subtraction of two matrix");
+    printMatrix(row,col,sum[row][col]);
+}
+
+// Function to multiply two matrices
+void multiplication(int rows1, int cols1, int cols2, int matrix1[rows1][cols1], int matrix2[cols1][cols2], int result[rows1][cols2]) {
+    for (int i = 0; i < rows1; i++) 
+    {
+        for (int j = 0; j < cols2; j++) 
+        {
+            result[i][j] = 0;
+            for (int k = 0; k < cols1; k++)
+            {
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
+            }
+        }
+    }
 }
 
 
