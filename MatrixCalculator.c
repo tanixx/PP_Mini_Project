@@ -10,6 +10,7 @@ void matrixInput(int row,int col,int matrix[row][col])
         {
             printf("Enter element of (%d , %d):",i+1,j+1);
             scanf("%d",&matrix[i][j]);
+            
         }    
     }
     printMatrix(row,col,matrix);
@@ -40,7 +41,6 @@ void addMatrix(int row,int col,int matrix1[row][col],int matrix2[row][col],int s
     }
     printf("Additon of two Matrix:\n");
     printMatrix(row,col,sum);
-
 }
 
 
@@ -55,7 +55,7 @@ void subMatrix(int row,int col,int matrix1[row][col],int matrix2[row][col],int s
         }
     }
     printf("Subtraction of two matrix:\n");
-    printMatrix(row,col,sum[row][col]);
+    printMatrix(row,col,sum);
 }
 
 // Function to multiply two matrices
@@ -72,7 +72,7 @@ void multiplication(int row1, int col1, int col2, int matrix1[row1][col1], int m
         }
     }
     printf("Multiplication of two Matrix:\n");
-    printMatrix(row1,col2,result[row1][col2]);
+    printMatrix(row1,col2,result);
 }
 
 //Transpose of single Matrix
@@ -86,7 +86,7 @@ void transpose(int row, int col, int matrix[row][col], int result[col][row])
         }
     }
     printf("Transpose of a Matrix:\n");
-    printMatrix(col,row,result[col][row]);
+    printMatrix(col,row,result);
 }
 //Determinant of square matrix
 int determinant(int row , int col ,int matrix[row][col], int det) 
@@ -132,15 +132,15 @@ int determinant(int row , int col ,int matrix[row][col], int det)
 
 
 // Function to calculate the adjoint of a square matrix
-int adjoint(int row,int col,int matrix[row][col], int size,int result[row][col])
+void adjoint(int row, int col, int matrix[row][col], int result[row][col])
 {
-    size=row;
+    int size = row;
     for (int i = 0; i < size; ++i)
     {
         for (int j = 0; j < size; ++j)
         {
             // Create a submatrix excluding the current row and column
-            float submatrix[row - 1][col - 1];
+            int submatrix[row - 1][col - 1];
             int sub_i = 0, sub_j = 0;
             for (int row1 = 0; row1 < size; ++row1)
             {
@@ -149,7 +149,7 @@ int adjoint(int row,int col,int matrix[row][col], int size,int result[row][col])
                     if (row1 != i && col1 != j)
                     {
                         submatrix[sub_i][sub_j++] = matrix[row1][col1];
-                        if (sub_j == size - 1) 
+                        if (sub_j == size - 1)
                         {
                             sub_j = 0;
                             sub_i++;
@@ -159,38 +159,38 @@ int adjoint(int row,int col,int matrix[row][col], int size,int result[row][col])
             }
 
             // Calculate the cofactor and transpose to get the adjoint
-            result[j][i] = ((i + j) % 2 == 0 ? 1 : -1) * determinant(row-1,col-1,submatrix, size - 1);
+            result[j][i] = ((i + j) % 2 == 0 ? 1 : -1) * determinant(row - 1, col - 1, submatrix, size - 1);
         }
     }
-    return result;
+    printf("Adjoint of Matrix:\n");
+    printMatrix(row, col, result);
 }
+
 //Inverse of matrix
-void inverse(int det,int row,int col,int matrix[row][col])
+void inverse(int row,int col,int matrix[row][col])
 {
     int size=row;
-    det=determinant(row,col,matrix,size);
+    int det=determinant(row,col,matrix,size);
     int result[row][col];
-    int adjmatrix[row][col];
-    adjoint(row,col,matrix[row][col],size,result[row][col]);
-    for(int i=0;i<row;i++)
+    adjoint(row,col,matrix,result);
+    printf("Inverse of a Matrix:\n");
+     for(int i=0;i<row;i++)
     {
         for(int j=0;j<col;j++)
         {
-            result[i][j]=adjmatrix[i][j]/det;
+            printf("%d/%d  ",result[i][j],det);
         }
+        printf("\n");
     }
-    
-    printMatrix(row,col,result);
 }
 
 
 // Function to check whether a matrix is an identity matrix
-void isIdentityMatrix(int row,int col,int matrix[row][col], int size) 
+void isIdentityMatrix(int row,int col,int matrix[row][col]) 
 {
-    size=row;
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < row; ++i)
     {
-        for (int j = 0; j < size; ++j)
+        for (int j = 0; j < col; ++j)
         {
             // Diagonal elements should be 1, and non-diagonal elements should be 0
             if ((i == j && matrix[i][j] != 1) || (i != j && matrix[i][j] != 0)) {
@@ -226,9 +226,6 @@ int main()
     printf("-------------------------------------------------------\n");
     printf("9.Check for Identity Matrix\n");
     printf("-------------------------------------------------------\n");
-    printf("10.All above Single Matrix operation\n");
-    printf("-------------------------------------------------------\n");
-    printf("-------------------------------------------------------\n");
     int choice;
     printf("Enter your choice:");
     scanf("%d",&choice);
@@ -245,7 +242,7 @@ int main()
         matrixInput(row,col,mat1);
         printf("Enter elements of matrix 1 ;\n");
         matrixInput(row,col,mat2);
-        addMatrix(row,col,mat1,mat2,sum);     
+        addMatrix(row,col,mat1,mat2,sum);      
     }
     if(choice==2){
         int row,col;
@@ -260,7 +257,7 @@ int main()
         matrixInput(row,col,mat1);
         printf("Enter elements of matrix 1 ;\n");
         matrixInput(row,col,mat2);
-        subMatrix(row,col,mat1,mat2,sum);     
+        subMatrix(row,col,mat1,mat2,sub);      
     }
     if(choice==3){
         int row,col;
@@ -275,7 +272,7 @@ int main()
         matrixInput(row,col,mat1);
         printf("Enter elements of matrix 1 ;\n");
         matrixInput(row,col,mat2);
-        multiplication(row,col,mat1,mat2,mul);     
+        multiplication(row,col,col,mat1,mat2,mul);      
     }
     if(choice==4){
         int row,col;
@@ -290,9 +287,9 @@ int main()
         matrixInput(row,col,mat1);
         printf("Enter elements of matrix 1 ;\n");
         matrixInput(row,col,mat2);
-        addMatrix(row,col,mat1,mat2,result);     
-        subMatrix(row,col,mat1,mat2,result);     
-        multiplication(row,col,mat1,mat2,result);     
+        addMatrix(row,col,mat1,mat2,result);      
+        subMatrix(row,col,mat1,mat2,result);      
+        multiplication(row,col,col,mat1,mat2,result);      
     }
     if(choice==5){
         int row,col;
@@ -300,23 +297,11 @@ int main()
         scanf("%d",&row);
         printf("Enter number of col:");
         scanf("%d",&col);
-        int mat1[row][col];
+        int mat[row][col];
         int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        transpose(row,col,mat1,result);
-    }
-    if(choice==7){
-        int row,col;
-        printf("Enter number of rows:");
-        scanf("%d",&row);
-        printf("Enter number of col:");
-        scanf("%d",&col);
-        int mat1[row][col];
-        int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        determinent(row,col,mat1,result);
+        printf("Enter elements of matrix:\n");
+        matrixInput(row,col,mat);
+        transpose(row,col,mat,result);            
     }
     if(choice==6){
         int row,col;
@@ -324,24 +309,34 @@ int main()
         scanf("%d",&row);
         printf("Enter number of col:");
         scanf("%d",&col);
-        int mat1[row][col];
+        int mat[row][col];
         int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        adjoint(row,col,mat1,result);
+        printf("Enter elements of matrix:\n");
+        matrixInput(row,col,mat);
+        adjoint(row,col,mat,result);            
     }
-        
+    if(choice==7){
+        int row,col;
+        printf("Enter number of rows:");
+        scanf("%d",&row);
+        printf("Enter number of col:");
+        scanf("%d",&col);
+        int mat[row][col];
+        int det;
+        printf("Enter elements of matrix:\n");
+        matrixInput(row,col,mat);
+        printf("%d",determinant(row,col,mat,det));
+    }
     if(choice==8){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
         printf("Enter number of col:");
         scanf("%d",&col);
-        int mat1[row][col];
-        int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        inverse(row,col,mat1,result);
+        int mat[row][col];
+        printf("Enter elements of matrix:\n");
+        matrixInput(row,col,mat);
+        inverse(row,col,mat);
     }
     if(choice==9){
         int row,col;
@@ -349,27 +344,13 @@ int main()
         scanf("%d",&row);
         printf("Enter number of col:");
         scanf("%d",&col);
-        int mat1[row][col];
-        int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        isIdentityMatrix(row,col,mat1,result,row);
+        int mat[row][col];
+        printf("Enter elements of matrix:\n");
+        matrixInput(row,col,mat);
+        isIdentityMatrix(row,col,mat);
+        }
+    else{
+        printf("invalid choice:\n");
     }
-    if(choice==10){
-        int row,col;
-        printf("Enter number of rows:");
-        scanf("%d",&row);
-        printf("Enter number of col:");
-        scanf("%d",&col);
-        int mat1[row][col];
-        int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
-        matrixInput(row,col,mat1);
-        transpose(row,col,mat1,result);    
-        determinent(row,col,mat1,result);    
-        inverse(row,col,mat1,result);   
-        isIdentityMatrix(row,col,mat1,result,row);
-    }
-        
     return 0;
 }
