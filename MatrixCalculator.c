@@ -353,7 +353,7 @@ int main()
         int result[row][col];
         printf("Enter elements of matrix 1 ;\n");
         matrixInput(row,col,mat1);
-        isIdentityMatrix(row,col,mat1,result);
+        isIdentityMatrix(row,col,mat1,result,row);
     }
     if(choice==10){
         int row,col;
@@ -368,7 +368,7 @@ int main()
         transpose(row,col,mat1,result);    
         determinent(row,col,mat1,result);    
         inverse(row,col,mat1,result);   
-        isIdentityMatrix(row,col,mat1,result);
+        isIdentityMatrix(row,col,mat1,result,row);
     }
         
     return 0;
