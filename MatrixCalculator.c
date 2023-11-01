@@ -238,13 +238,13 @@ int main()
         int mat1[row][col];
         int mat2[row][col];
         int sum[row][col];
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 1 :\n");
         matrixInput(row,col,mat1);
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 2 :\n");
         matrixInput(row,col,mat2);
         addMatrix(row,col,mat1,mat2,sum);      
     }
-    if(choice==2){
+    else if(choice==2){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -253,13 +253,13 @@ int main()
         int mat1[row][col];
         int mat2[row][col];
         int sub[row][col];
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 1 :\n");
         matrixInput(row,col,mat1);
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 2 :\n");
         matrixInput(row,col,mat2);
         subMatrix(row,col,mat1,mat2,sub);      
     }
-    if(choice==3){
+    else if(choice==3){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -268,13 +268,13 @@ int main()
         int mat1[row][col];
         int mat2[row][col];
         int mul[row][col];
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 1 :\n");
         matrixInput(row,col,mat1);
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 2 :\n");
         matrixInput(row,col,mat2);
         multiplication(row,col,col,mat1,mat2,mul);      
     }
-    if(choice==4){
+    else if(choice==4){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -283,15 +283,15 @@ int main()
         int mat1[row][col];
         int mat2[row][col];
         int result[row][col];
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 1 :\n");
         matrixInput(row,col,mat1);
-        printf("Enter elements of matrix 1 ;\n");
+        printf("Enter elements of matrix 2 :\n");
         matrixInput(row,col,mat2);
         addMatrix(row,col,mat1,mat2,result);      
         subMatrix(row,col,mat1,mat2,result);      
         multiplication(row,col,col,mat1,mat2,result);      
     }
-    if(choice==5){
+    else if(choice==5){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -303,7 +303,7 @@ int main()
         matrixInput(row,col,mat);
         transpose(row,col,mat,result);            
     }
-    if(choice==6){
+    else if(choice==6){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -315,7 +315,7 @@ int main()
         matrixInput(row,col,mat);
         adjoint(row,col,mat,result);            
     }
-    if(choice==7){
+    else if(choice==7){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -325,9 +325,10 @@ int main()
         int det;
         printf("Enter elements of matrix:\n");
         matrixInput(row,col,mat);
+        printf("Deteminant of matrix:\n");
         printf("%d",determinant(row,col,mat,det));
     }
-    if(choice==8){
+    else if(choice==8){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
@@ -338,7 +339,7 @@ int main()
         matrixInput(row,col,mat);
         inverse(row,col,mat);
     }
-    if(choice==9){
+    else if(choice==9){
         int row,col;
         printf("Enter number of rows:");
         scanf("%d",&row);
